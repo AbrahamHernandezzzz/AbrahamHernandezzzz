@@ -52,7 +52,7 @@ const d = (s) => `style="animation-delay:${s}s"`;
 const XP_Y = 400, XP_H = 100, XP_CY = XP_Y + XP_H / 2;
 const xml = (s) => s.replace(/&/g, "&amp;");
 const XP = [
-  { seal: ["Claude Certified", "Architect"] },
+  { seal: ["Expert AI", "Architect"] },
   { big: "2+", es: ["años en el espacio", "de la IA"], en: ["years in the", "AI space"] },
   { big: "1.5", es: ["años construyendo sistemas", "de turismo y logística"], en: ["years building tourism", "systems & logistics"] },
   { big: "15+", es: ["años de industria en el", "equipo que me acompaña"], en: ["years of industry in the", "team beside me"] },
@@ -87,7 +87,7 @@ ${XP.map(xpCol).join("\n")}`;
 // ------------------------------------------------------------------ header
 out(
   "header.svg",
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 530" width="1280" height="530" role="img" aria-label="Abraham Hernández, fundador y CEO de Starknot. Digital Architecture for Ambitious Businesses. Claude Certified Architect, más de 2 años en IA, 1.5 años construyendo sistemas de turismo y logística, con un equipo de más de 15 años en la industria.">
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 530" width="1280" height="530" role="img" aria-label="Abraham Hernández, fundador y CEO de Starknot. Digital Architecture for Ambitious Businesses. Expert AI Architect, más de 2 años en IA, 1.5 años construyendo sistemas de turismo y logística, con un equipo de más de 15 años en la industria.">
 <title>Abraham Hernández — Founder &amp; CEO, Starknot</title>
 <defs>
 ${BG()}
