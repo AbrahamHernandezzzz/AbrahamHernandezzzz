@@ -6,13 +6,13 @@
 
 <p align="center">
   Soy <b>Abraham Hernández</b>, fundador y CEO de <a href="https://www.starknot.co/es"><b>Starknot</b></a>.<br>
-  Desde Costa Rica, para toda Latinoamérica, construyo la infraestructura digital de negocios que quieren liderar su sector:<br>
+  Desde Costa Rica, para todo el mundo, construyo la infraestructura digital de negocios que quieren liderar su sector:<br>
   sitios a medida, sistemas para turismo y logística, agentes de IA para marketing y consultoría en IA.
 </p>
 
 <p align="center">
   <sub>I'm <b>Abraham Hernández</b>, founder and CEO of <a href="https://www.starknot.co/en"><b>Starknot</b></a>.<br>
-  From Costa Rica, for all of Latin America, I build the digital infrastructure of businesses set on leading their sector:<br>
+  From Costa Rica, for the whole world, I build the digital infrastructure of businesses set on leading their sector:<br>
   custom websites, tourism and logistics systems, AI marketing agents and AI consulting.</sub>
 </p>
 
@@ -65,5 +65,5 @@
 </p>
 
 <p align="center">
-  <sub>Starknot · Costa Rica · LATAM</sub>
+  <sub>Starknot · Costa Rica</sub>
 </p>

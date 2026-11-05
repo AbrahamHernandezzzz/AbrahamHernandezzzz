@@ -46,19 +46,56 @@ const SHINE = `<linearGradient id="shine" x1="0" x2="1"><stop offset="0" stop-co
 const BG = (id = "bg") => `<linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${C.abyss}"/><stop offset=".55" stop-color="${C.navy}"/><stop offset="1" stop-color="${C.midnight}"/></linearGradient>`;
 const d = (s) => `style="animation-delay:${s}s"`;
 
+// ------------------------------------------------------------------ experience strip
+// The certification and three numbers under the hero, drawn like the metrics of the case card.
+const XP_Y = 400, XP_H = 100, XP_CY = XP_Y + XP_H / 2;
+const xml = (s) => s.replace(/&/g, "&amp;");
+const XP = [
+  { seal: ["Claude Certified", "Architect"] },
+  { big: "2+", es: ["años en el espacio", "de la IA"], en: ["years in the", "AI space"] },
+  { big: "1.5", es: ["años construyendo sistemas", "de turismo y logística"], en: ["years building tourism", "systems & logistics"] },
+  { big: "15+", es: ["años de industria en el", "equipo que me acompaña"], en: ["years of industry in the", "team beside me"] },
+];
+const xpCol = (c, i) => {
+  const x0 = 40 + i * 300;
+  const delay = 1.7 + i * 0.2;
+  if (c.seal) {
+    return `<g class="rise" ${d(delay)}>
+<circle cx="${x0 + 58}" cy="${XP_CY}" r="30" fill="${C.abyss}" fill-opacity=".55" stroke="${C.gold}" stroke-opacity=".45"/>
+<path transform="translate(${x0 + 58} ${XP_CY}) scale(1.05) translate(-640 -20)" d="M640 8c.6 7 5 11.4 12 12-7 .6-11.4 5-12 12-.6-7-5-11.4-12-12 7-.6 11.4-5 12-12Z" fill="${C.gold}"/>
+<text x="${x0 + 104}" y="${XP_CY - 4}" style="font-family:IS,Georgia,serif;font-size:27px;fill:${C.ivory}">${c.seal[0]}</text>
+<text x="${x0 + 104}" y="${XP_CY + 26}" style="font-family:IS,Georgia,serif;font-size:27px;fill:${C.goldSoft}">${c.seal[1]}</text>
+</g>`;
+  }
+  const lines = [...c.es.map((t) => [t, 0]), ...c.en.map((t) => [t, 1])];
+  let y = 0;
+  const rows = lines.map(([t, k], j) => {
+    if (j) y += k === 0 ? 18 : lines[j - 1][1] === 0 ? 21 : 16;
+    return [t, k, y];
+  });
+  const top = XP_CY - y / 2 + 5;
+  return `<g class="rise" ${d(delay)}>
+<text x="${x0 + 30}" y="${XP_CY + 18}" style="font-family:IS,Georgia,serif;font-size:52px;fill:${C.goldSoft}">${c.big}</text>
+${rows.map(([t, k, yy]) => `<text x="${x0 + 108}" y="${(top + yy).toFixed(1)}" style="${k === 0 ? `font:400 14px ${SANS};fill:#e2e6ec;fill-opacity:.85` : `font:400 12px ${SANS};fill:#e2e6ec;fill-opacity:.52`}">${xml(t)}</text>`).join("\n")}
+</g>`;
+};
+const XP_BAND = `<rect class="rise" x="40" y="${XP_Y}" width="1200" height="${XP_H}" rx="22" fill="#fff" fill-opacity=".035" stroke="#fff" stroke-opacity=".1" ${d(1.6)}/>
+${[1, 2, 3].map((i) => `<path class="rise" d="M${40 + i * 300} ${XP_Y + 24} V ${XP_Y + XP_H - 24}" stroke="${C.gold}" stroke-opacity=".25" ${d(1.7)}/>`).join("\n")}
+${XP.map(xpCol).join("\n")}`;
+
 // ------------------------------------------------------------------ header
 out(
   "header.svg",
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 420" width="1280" height="420" role="img" aria-label="Abraham Hernández, fundador y CEO de Starknot. Digital Architecture for Ambitious Businesses.">
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 530" width="1280" height="530" role="img" aria-label="Abraham Hernández, fundador y CEO de Starknot. Digital Architecture for Ambitious Businesses. Claude Certified Architect, más de 2 años en IA, 1.5 años construyendo sistemas de turismo y logística, con un equipo de más de 15 años en la industria.">
 <title>Abraham Hernández — Founder &amp; CEO, Starknot</title>
 <defs>
 ${BG()}
-<radialGradient id="glow" cx="0.2" cy="0.52" r="0.36"><stop offset="0" stop-color="${C.gold}" stop-opacity=".22"/><stop offset="1" stop-color="${C.gold}" stop-opacity="0"/></radialGradient>
-<radialGradient id="glow2" cx="0.86" cy="0.18" r="0.4"><stop offset="0" stop-color="#1f6c80" stop-opacity=".35"/><stop offset="1" stop-color="#1f6c80" stop-opacity="0"/></radialGradient>
+<radialGradient id="glow" cx="0.2" cy="0.396" r="0.36"><stop offset="0" stop-color="${C.gold}" stop-opacity=".22"/><stop offset="1" stop-color="${C.gold}" stop-opacity="0"/></radialGradient>
+<radialGradient id="glow2" cx="0.86" cy="0.14" r="0.4"><stop offset="0" stop-color="#1f6c80" stop-opacity=".35"/><stop offset="1" stop-color="#1f6c80" stop-opacity="0"/></radialGradient>
 <radialGradient id="disc" cx="0.5" cy="0.45" r="0.6"><stop offset="0" stop-color="#0b3f4e"/><stop offset="1" stop-color="${C.abyss}"/></radialGradient>
 <linearGradient id="meteor" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff4dc" stop-opacity=".9"/></linearGradient>
 ${SHINE}
-<clipPath id="frame"><rect width="1280" height="420" rx="24"/></clipPath>
+<clipPath id="frame"><rect width="1280" height="530" rx="24"/></clipPath>
 </defs>
 <style>${FONTS}${BASE_CSS}
 .spin{transform-origin:250px 210px;animation:spin 30s linear infinite}
@@ -78,10 +115,10 @@ ${SHINE}
 ${REDUCED()}
 </style>
 <g clip-path="url(#frame)">
-<rect width="1280" height="420" fill="url(#bg)"/>
-<rect width="1280" height="420" fill="url(#glow)"/>
-<rect width="1280" height="420" fill="url(#glow2)"/>
-${stars(7, 90, 1280, 420)}
+<rect width="1280" height="530" fill="url(#bg)"/>
+<rect width="1280" height="530" fill="url(#glow)"/>
+<rect width="1280" height="530" fill="url(#glow2)"/>
+${stars(7, 90, 1280, 420)}<g transform="translate(0 420)">${stars(8, 22, 1280, 110)}</g>
 <g class="meteor"><line x1="1160" y1="40" x2="1240" y2="0" stroke="url(#meteor)" stroke-width="1.6" stroke-linecap="round" transform="rotate(180 1200 20)"/></g>
 <circle class="pulse" cx="250" cy="210" r="104" fill="none" stroke="${C.gold}" stroke-opacity=".28"/>
 <g class="spin"><circle cx="250" cy="210" r="132" fill="none" stroke="${C.gold}" stroke-opacity=".4" stroke-width="1.2" stroke-dasharray="2 9"/><circle cx="382" cy="210" r="3.6" fill="${C.goldSoft}"/></g>
@@ -92,11 +129,12 @@ ${stars(7, 90, 1280, 420)}
 <text class="name rise" x="456" y="206" ${d(0.45)}>Abraham Hernández</text>
 <text class="tag rise" x="460" y="256" ${d(0.75)}>Arquitectura digital para negocios ambiciosos.</text>
 <text class="line rise" x="460" y="296" ${d(1.05)}>Digital Architecture for Ambitious Businesses.</text>
-<text class="small rise" x="460" y="338" ${d(1.3)}>COSTA RICA  ·  LATAM  ·  STARKNOT.CO</text>
+<text class="small rise" x="460" y="338" ${d(1.3)}>COSTA RICA  ·  STARKNOT.CO</text>
 <path class="draw" d="M460 358 H 760" stroke="${C.gold}" stroke-opacity=".6" stroke-width="1.2" pathLength="1" ${d(1.5)}/>
-<rect class="sweep" x="0" y="0" width="420" height="420" fill="url(#shine)"/>
+${XP_BAND}
+<rect class="sweep" x="0" y="0" width="420" height="530" fill="url(#shine)"/>
 </g>
-<rect x=".5" y=".5" width="1279" height="419" rx="24" fill="none" stroke="#fff" stroke-opacity=".08"/>
+<rect x=".5" y=".5" width="1279" height="529" rx="24" fill="none" stroke="#fff" stroke-opacity=".08"/>
 </svg>`,
 );
 
