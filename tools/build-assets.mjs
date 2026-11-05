@@ -21,6 +21,7 @@ const SANS = "-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-s
 const FONTS = `@font-face{font-family:IS;src:url(data:font/woff2;base64,${b64("instrument-serif-latin.woff2")}) format('woff2')}
 @font-face{font-family:ISI;src:url(data:font/woff2;base64,${b64("instrument-serif-italic-latin.woff2")}) format('woff2')}`;
 const MARK = `data:image/webp;base64,${b64("starknot-mark-256.webp")}`;
+const PHOTO = `data:image/webp;base64,${b64("founder-photo-400.webp")}`;
 
 /** A deterministic sky: the same stars every build. */
 function stars(seed, n, w, h, { minR = 0.5, maxR = 1.6 } = {}) {
@@ -96,6 +97,7 @@ ${BG()}
 <linearGradient id="meteor" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff4dc" stop-opacity=".9"/></linearGradient>
 ${SHINE}
 <clipPath id="frame"><rect width="1280" height="530" rx="24"/></clipPath>
+<clipPath id="portrait"><circle cx="250" cy="210" r="90"/></clipPath>
 </defs>
 <style>${FONTS}${BASE_CSS}
 .spin{transform-origin:250px 210px;animation:spin 30s linear infinite}
@@ -123,8 +125,9 @@ ${stars(7, 90, 1280, 420)}<g transform="translate(0 420)">${stars(8, 22, 1280, 1
 <circle class="pulse" cx="250" cy="210" r="104" fill="none" stroke="${C.gold}" stroke-opacity=".28"/>
 <g class="spin"><circle cx="250" cy="210" r="132" fill="none" stroke="${C.gold}" stroke-opacity=".4" stroke-width="1.2" stroke-dasharray="2 9"/><circle cx="382" cy="210" r="3.6" fill="${C.goldSoft}"/></g>
 <g class="spinr"><circle cx="250" cy="210" r="168" fill="none" stroke="${C.cyan}" stroke-opacity=".18"/><circle cx="250" cy="42" r="2.6" fill="#cfe3f1" fill-opacity=".85"/></g>
-<circle cx="250" cy="210" r="84" fill="url(#disc)" stroke="${C.gold}" stroke-opacity=".35"/>
-<g class="float"><image href="${MARK}" x="182" y="142" width="136" height="136"/></g>
+<circle cx="250" cy="210" r="94" fill="url(#disc)" stroke="${C.gold}" stroke-opacity=".5" stroke-width="1.4"/>
+<image href="${PHOTO}" x="160" y="120" width="180" height="180" preserveAspectRatio="xMidYMid slice" clip-path="url(#portrait)"/>
+<g class="float"><circle cx="314" cy="274" r="27" fill="${C.abyss}" stroke="${C.gold}" stroke-opacity=".6" stroke-width="1.2"/><image href="${MARK}" x="293" y="253" width="42" height="42"/></g>
 <text class="eyebrow rise" x="460" y="128" ${d(0.2)}>STARKNOT  ·  FUNDADOR Y CEO  ·  FOUNDER &amp; CEO</text>
 <text class="name rise" x="456" y="206" ${d(0.45)}>Abraham Hernández</text>
 <text class="tag rise" x="460" y="256" ${d(0.75)}>Arquitectura digital para negocios ambiciosos.</text>
